@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code O Clock</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/clock.css"> <!-- Ensure the path to the CSS file is correct -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"> <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"> <!-- AOS CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet"> <!-- Google Fonts -->
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif; /* Updated font-family */
+            background-color: #000; /* Ensure background is black */
+            color: #fff; /* Ensure text is white */
+            padding-top: 80.5px; /* Adjust padding to avoid content being hidden behind fixed navbar */
+        }
+
+        header .logo img {
+            height: 90px; /* Increase logo size by 20% */
+        }
+
+        .navbar {
+            font-size: 1.15rem; /* Increase navbar size by 15% */
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center; /* Align items to the center */
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            transition: background 0.3s;
+            font-weight: bold; /* Make text bold */
+            text-transform: uppercase; /* Make text uppercase */
+            letter-spacing: 0.1em; /* Add letter spacing */
+        }
+
+        nav ul li a:hover {
+            background-color: rgba(15, 2, 2, 0.499);
+        }
+
+        .nav-contact {
+            border: 2px solid #fff; /* Add border */
+            padding: 5px 15px; /* Add padding */
+            transition: background 0.3s, color 0.3s; /* Add transition for background and color */
+        }
+
+        .nav-contact:hover {
+            background-color: #fff; /* Change background color on hover */
+            color: #000; /* Change text color on hover */
+        }
+
+        .hero {
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            text-align: center;
+            padding: 100px 20px;
+            overflow: hidden; /* To ensure the overlay and content stay within bounds */
+        }
+
+        .hero .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3));
+        }
+
+        .hero .content {
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 2s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            font-family: 'Roboto', sans-serif; /* Updated font-family */
+            margin: 0;
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            margin: 20px 0;
+        }
+
+        .btn-warning {
+            background-color: #f0ad4e;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .btn-warning:hover {
+            background-color: #ec971f;
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2em;
+            }
+
+            .hero p {
+                font-size: 1em;
+            }
+        }
+
+        /* Additional Styles for the Events Section */
+        .events {
+            background-color: #000; /* Ensure background is black */
+            color: #fff; /* Ensure text is white */
+        }
+
+        .event-item {
+            display: block;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 30px;
+            text-decoration: none; /* Ensure links don't have underline */
+            background: #1a1a1a;
+            border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .event-item .event-img {
+            width: 100%;
+            height: 200px; /* Set a fixed height for all images */
+            object-fit: cover; /* Ensure the images maintain their aspect ratio */
+            transition: transform 0.3s ease-in-out;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        .event-item .event-text {
+            padding: 20px; /* Add some padding to the text */
+            text-align: center;
+            color: #fff; /* Ensure text is white */
+        }
+
+        .event-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .event-item:hover .event-img {
+            transform: scale(1.1);
+        }
+
+        /* Specific rule to make Streamlined Event text white */
+        .streamlined-event-text {
+            color: #fff; /* Set text color to white */
+        }
+
+        /* Styles for the Contact Section */
+        .contact-section {
+            background-color: #000;
+            color: #fff;
+            padding: 50px 0;
+        }
+
+        .contact-section h2 {
+            color: #fff;
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .contact-section h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: #f0ad4e;
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+
+        .contact-section .form-control,
+        .contact-section .btn-submit {
+            border-radius: 0;
+            background-color: #000;
+            color: #fff;
+            border: 1px solid #ccc;
+        }
+
+        .contact-section .form-control::placeholder {
+            color: #ccc;
+        }
+
+        .contact-section .btn-submit {
+            background-color: #f0ad4e; /* Match the background color */
+            border: none; /* Remove border */
+            padding: 10px 20px; /* Add padding */
+            text-transform: uppercase; /* Uppercase text */
+            letter-spacing: 0.1em; /* Add letter spacing */
+            font-weight: bold; /* Bold text */
+            transition: background 0.3s, transform 0.3s; /* Add transition for hover effect */
+        }
+
+        .contact-section .btn-submit:hover {
+            background-color: #ec971f; /* Match the hover color */
+            transform: scale(1.05);
+        }
+
+        .contact-section .form-check-label {
+            color: #ccc;
+        }
+
+        .contact-section .map {
+            margin-top: 20px;
+        }
+
+        .contact-info p i {
+            margin-right: 10px;
+        }
+
+        /* Styles for the Footer */
+        .footer {
+            background-color: #000;
+            color: #fff;
+            padding: 50px 0;
+            text-align: center; /* Center align text in the footer */
+        }
+
+        .footer h3,
+        .footer h4 {
+            color: #fff;
+        }
+
+        .footer a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .footer .fab {
+            margin-right: 15px;
+        }
+
+        .footer .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .footer .footer-content .social-links {
+            display: flex;
+            justify-content: center; /* Center align social links */
+            width: 100%; /* Ensure full width for proper centering */
+            margin-top: 20px; /* Add spacing between sections */
+        }
+
+        .footer .footer-content .social-links a {
+            margin: 0 10px;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .footer .footer-content .social-links a:hover {
+            color: #f0ad4e;
+        }
+
+        .footer .footer-content .menu,
+        .footer .footer-content .contact-info {
+            flex: 1;
+            text-align: center; /* Center align menu and contact info */
+        }
+
+        .footer .footer-content .menu ul,
+        .footer .footer-content .contact-info address {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .footer .footer-content .menu ul {
+            margin-top: 15px;
+        }
+
+        .footer .footer-content .menu ul li,
+        .footer .footer-content .contact-info address p {
+            margin-bottom: 10px;
+        }
+
+        .footer .footer-content h4 {
+            margin-bottom: 10px;
+        }
+
+        .footer .footer-content .logo-title {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; /* Center align logo title */
+            width: 100%;
+            text-align: center; /* Center align text */
+        }
+
+        @media (max-width: 768px) {
+            .footer .footer-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .footer .footer-content > div {
+                margin-bottom: 20px;
+            }
+
+            .footer .footer-content .social-links {
+                justify-content: center;
+            }
+
+            .footer .footer-content .menu ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footer .footer-content .menu ul li {
+                width: auto;
+            }
+
+            .footer {
+                padding-bottom: 20px; /* Ensure there is no extra black part */
+            }
+        }
+
+        /* Chief Guest Spotlight Section Styles */
+        .chief-guest-section {
+            padding: 20px;
+            background-color: #000; /* Ensure background is black */
+            color: #fff; /* Ensure text is white */
+            border-top: 1px solid #e0e0e0;
+            margin-top: 20px;
+        }
+
+        .chief-guest-section h2 {
+            font-size: 2.5em;
+            font-family: 'Roboto', sans-serif; /* Updated font-family */
+            margin-bottom: 20px;
+            color: #fff; /* Text color set to white */
+            position: relative; /* Required for the line */
+        }
+
+        .chief-guest-section h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: #f0ad4e;
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+
+        .guest-item {
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            background: #1a1a1a;
+            border-radius: 8px;
+            padding: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .guest-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .guest-photo {
+            width: 100%;
+            height: 400px; /* Adjust height to ensure the entire image is displayed */
+            object-fit: cover; /* Ensure the images maintain their aspect ratio */
+            transition: transform 0.3s ease-in-out;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        .guest-item:hover .guest-photo {
+            transform: scale(1.1);
+        }
+
+        .guest-text {
+            padding: 20px; /* Add some padding to the text */
+            color: #fff; /* Ensure text is white */
+        }
+
+        .guest-text h4 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .guest-text p {
+            font-size: 1em;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .guest-text a {
+            color: #f0ad4e;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .guest-text a:hover {
+            text-decoration: underline;
+        }
+
+        /* Gallery Section Styles */
+        .gallery-section {
+            padding: 50px 0;
+            background-color: #000;
+            color: #fff;
+        }
+
+        .gallery-section h2 {
+            text-align: center;
+            font-family: 'Roboto', sans-serif; /* Updated font-family */
+            margin-bottom: 40px;
+            color: #fff;
+            position: relative; /* Required for the line */
+        }
+
+        .gallery-section h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: #f0ad4e;
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+
+        .gallery-item {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Styles for mobile navigation menu */
+        @media (max-width: 768px) {
+            .navbar-collapse {
+                position: absolute;
+                top: 80px; /* Adjust to align with your header */
+                right: 0;
+                width: 200px; /* Adjust the width as needed */
+                background-color: #333;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+                z-index: 1000;
+                display: none; /* Initially hide the menu */
+            }
+
+            .navbar-collapse.show {
+                display: block; /* Show the menu when toggler is clicked */
+            }
+
+            .navbar-nav {
+                flex-direction: column;
+            }
+
+            .navbar-nav .nav-item {
+                margin-bottom: 10px;
+            }
+        }
+
+        /* Add the line under other section headers */
+        .events h2,
+        .empowering-coders h2,
+        .chief-guest-section h2,
+        .gallery-section h2,
+        .contact-section h2 {
+            position: relative; /* Required for the line */
+        }
+
+        .events h2::after,
+        .empowering-coders h2::after,
+        .chief-guest-section h2::after,
+        .gallery-section h2::after,
+        .contact-section h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: #f0ad4e;
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-dark text-white fixed-top"> <!-- Add fixed-top class -->
+        <div class="container d-flex justify-content-between align-items-center py-3">
+            <div class="logo">
+                <img src="static/su3.jpeg" alt="Code O Clock Logo" class="img-fluid">
+            </div>
+            <nav class="navbar navbar-expand-lg navbar-dark">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#home">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#events">Services</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#about">About</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-contact" href="#contact">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home" class="hero d-flex align-items-center" style="background-image: url('static/su1.jpeg');" data-aos="fade-up">
+        <div class="overlay"></div>
+        <div class="container text-center text-white">
+            <div class="content">
+                <h1>Code O Clock</h1>
+                <p>
+                    Code O Clock is the flagship event organized by the Department of Artificial Intelligence and Data Science. This dynamic platform is designed to bring together coding enthusiasts, developers, and innovators for a series of exciting and intellectually stimulating events. From coding workshops and hackathons to programming competitions, Code O Clock offers a unique opportunity for participants to enhance their skills, collaborate with peers, and solve real-world challenges.
+                </p>
+                <a href="#" class="btn btn-warning">Register Now</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="empowering-coders py-5" data-aos="fade-left">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h2 class="text-uppercase">Empowering Coders</h2>
+                    <h3>Join the coding revolution</h3>
+                    <p>Welcome to Code O Clock</p>
+                    <p>
+                        Code O Clock is the flagship event organized by the Department of Artificial Intelligence and Data Science. This dynamic platform is designed to bring together coding enthusiasts, developers, and innovators for a series of exciting and intellectually stimulating events. From coding workshops and hackathons to programming competitions, Code O Clock offers a unique opportunity for participants to enhance their skills, collaborate with peers, and solve real-world challenges.
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <img src="static/su2.jpeg" alt="Code Image" class="img-fluid"> <!-- Update the image path -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chief Guest Spotlight Section -->
+    <section id="spotlight" class="chief-guest-section py-5" data-aos="fade-up">
+        <div class="container">
+            <h2 class="text-uppercase text-center">Our Chief Guests</h2>
+            <div class="row">
+                <div class="col-md-6" data-aos="flip-left">
+                    <div class="guest-item">
+                        <img class="guest-photo" src="static/vishnu.jpeg" alt="Founder of JarvisLabs.ai">
+                        <div class="guest-text">
+                            <h4>VISHNU SUBRAMANIAN</h4>
+                            <p>We are honored to welcome the founder of <a href="https://www.jarvislabs.ai" target="_blank">Jarvislabs.ai</a>, a leader in affordable GPU cloud platforms for AI. An active AI researcher and former CTO of a travel startup, he has helped many companies build AI solutions.</p>
+                            <p>Visit his <a href="https://www.youtube.com/channel/UCDXgtQh9Kz6pG5rKwB3KZcg" target="_blank">YouTube channel</a> for insights into deep learning.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6" data-aos="flip-left" data-aos-delay="100">
+                    <div class="guest-item">
+                        <img class="guest-photo" src="static/siddarth.jpg" alt="Siddarth, the Product Guy">
+                        <div class="guest-text">
+                            <h4>SIDDARTH KENGADARAN</h4>
+                            <p>He've spent over ten years immersed in product development, navigating the exciting journey from initial spark to successful launch and beyond. I've worked across diverse industries, gaining a deep understanding of what it takes to build products that users truly love.</p>
+                            <p>Visit his page at <a href="https://theproductguy.xyz/" target="_blank">theproductguy.xyz</a> for more information.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="gallery-section">
+        <div class="container">
+            <h2 class="text-uppercase text-center">Gallery</h2>
+            <div class="row">
+                <div class="col-md-4 gallery-item" data-aos="fade-up">
+                    <img src="static/10.JPG" alt="Gallery Image 1" class="img-fluid">
+                </div>
+                <div class="col-md-4 gallery-item" data-aos="fade-up" data-aos-delay="100">
+                    <img src="static/11.JPG" alt="Gallery Image 2" class="img-fluid">
+                </div>
+                <div class="col-md-4 gallery-item" data-aos="fade-up" data-aos-delay="200">
+                    <img src="static/12.JPG" alt="Gallery Image 3" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="events" class="events py-5" data-aos="fade-right">
+        <div class="container">
+            <h2 class="text-uppercase text-center">Our Events</h2>
+            <h3 class="streamlined-event-text text-center">Streamlined Event</h3>
+            <div class="row">
+                <div class="col-md-3" data-aos="flip-left">
+                    <div class="event-item">
+                        <img src="static/su1.jpeg" alt="Intellina" class="img-fluid event-img">
+                        <div class="event-text">
+                            <h4>INTELLINA</h4>
+                            <p>INR 500</p>
+                            <p>Simplify your event registration process with our platform.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3" data-aos="flip-left" data-aos-delay="100">
+                    <div class="event-item">
+                        <img src="static/su2.jpeg" alt="AI Day" class="img-fluid event-img">
+                        <div class="event-text">
+                            <h4>AI DAY</h4>
+                            <p>FREE REGISTRATION</p>
+                            <p>Host unforgettable hackathons with our expert tools.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3" data-aos="flip-left" data-aos-delay="200">
+                    <div class="event-item">
+                        <img src="static/su5.jpeg" alt="GPTathon" class="img-fluid event-img">
+                        <div class="event-text">
+                            <h4>GPTATHON</h4>
+                            <p>INR 250</p>
+                            <p>Efficiently manage programming competitions with ease.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3" data-aos="flip-left" data-aos-delay="300">
+                    <div class="event-item">
+                        <img src="static/su4.jpeg" alt="AI Workshop" class="img-fluid event-img">
+                        <div class="event-text">
+                            <h4>AI WORKSHOP</h4>
+                            <p>INR 1000</p>
+                            <p>Plan and execute coding workshops effortlessly.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section py-5" data-aos="fade-up">
+        <div class="container">
+            <h2 class="text-uppercase">We're here to assist you</h2>
+            <div class="row">
+                <div class="col-md-6" data-aos="fade-right">
+                    <form action="/send_email" method="post">
+                        <div class="form-group">
+                            <label for="name">Name *</label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email address *</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="email@website.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone number *</label>
+                            <input type="tel" class="form-control" id="phone" name="phone" placeholder="+91" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea class="form-control" id="message" name="message" rows="5"></textarea>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input type="checkbox" class="form-check-input" id="consent" name="consent" required>
+                            <label class="form-check-label" for="consent">I allow this website to store my submission so they can respond to my inquiry.</label>
+                        </div>
+                        <center><button type="submit" class="btn btn-warning btn-submit">Submit</button></center>
+                    </form>
+                    
+                </div>
+                <div class="col-md-6" data-aos="fade-left">
+                    <div class="map">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3916.9026655143464!2d76.97835391532425!3d11.00181109217695!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba859f8b2d2a5ab%3A0xf6ef93e1b2d2a5ab!2sMahalakshmi%20Garden%2C%20Gandhi%20Park%2C%20Coimbatore%2C%20Tamil%20Nadu%20641001%2C%20India!5e0!3m2!1sen!2sus!4v1613566110227!5m2!1sen!2sus" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                    <div class="contact-info mt-4">
+                        <p><strong>Get in touch</strong></p>
+                        <p><i class="fas fa-envelope"></i> <a href="mailto:nmrohitraj1112@gmail.com">nmrohitraj1112@gmail.com</a></p>
+                        <p><strong>Location</strong></p>
+                        <p><i class="fas fa-map-marker-alt"></i> Mahalakshmi garden, 2/48 COI, Tamil Nadu 641035 India</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer bg-dark text-white py-5" data-aos="fade-up">
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo-title">
+                    <h3>CODE O CLOCK</h3>
+                    <div class="social-links">
+                        <a href="#" class="text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="menu mt-4">
+                    <h4>Menu</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="#events" class="text-white">Services</a></li>
+                        <li><a href="#contact" class="text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="contact-info mt-4">
+                    <h4>Contact</h4>
+                    <address>
+                        <strong>CIT</strong><br>
+                        Avinashi Rd<br>
+                        Civil Aerodrome Post<br>
+                        Coimbatore<br>
+                        Tamil Nadu-641014<br>
+                        <a href="mailto:info@company.com" class="text-white">info@company.com</a>
+                    </address>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script> <!-- AOS JavaScript -->
+    <script>
+        AOS.init();
+        // Smooth scroll for navigation links
+        $(document).ready(function(){
+            $("a.nav-link").on('click', function(event) {
+                if (this.hash !== "") {
+                    event.preventDefault();
+                    var hash = this.hash;
+                    $('html, body').animate({
+                        scrollTop: $(hash).offset().top - 70
+                    }, 800);
+                }
+            });
+        });
+    </script>
+        <script>
+        function submitForm(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            const form = event.target;
+            const formData = new FormData(form);
+
+            fetch('/send_email', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === "success") {
+                    alert(data.message);
+                    form.reset(); // Optionally reset the form
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+            });
+        }
+    </script>
+</body>
+</html>

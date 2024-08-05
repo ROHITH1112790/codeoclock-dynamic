@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submission Details</title>
+</head>
+<body>
+    <h1>Submission Details</h1>
+    <p><strong>Name:</strong> {{ submission[1] }}</p>
+    <p><strong>Email:</strong> {{ submission[2] }}</p>
+    <p><strong>Phone:</strong> {{ submission[3] }}</p>
+    <p><strong>Message:</strong> {{ submission[4] }}</p>
+    <p><strong>Consent:</strong> {{ 'Yes' if submission[5] else 'No' }}</p>
+    
+    <h2>Reply</h2>
+    <form action="{{ url_for('handle_reply') }}" method="POST">
+        <input type="hidden" name="submission_id" value="{{ submission[0] }}">
+        <textarea name="reply_message" rows="5" cols="40" placeholder="Enter your reply here"></textarea><br>
+        <button type="submit">Send Reply</button>
+    </form>
+</body>
+</html>
