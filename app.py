@@ -122,11 +122,16 @@ def handle_reply():
 
 def validate_login(email, password):
     # Replace this with actual validation logic
-    return email == "admin@example.com" and password == "password123"
+    return email == "admin@gmail.com" and password == "password123"
 
 @app.route('/logout')
 def logout():
     return redirect(url_for('login_page'))
+
+@app.route('/register')
+def register():
+    return redirect('https://rzp.io/l/dWwW59XPT')
+
 
 if __name__ == "__main__":
     app.run(debug=True)
