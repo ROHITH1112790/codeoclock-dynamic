@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speakers Section</title>
+    <style>
+        /* Speakers Section Styles */
+        .speakers-section {
+            background-color: #000000;
+            padding: 5rem 0;
+        }
+
+        .ccontainer {
+            background-color: #000000;
+            padding: 2rem;
+            border-radius: 8px;
+        }
+
+        .speakers-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .speaker-item {
+            background-color: #f0ad4e;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin: 1rem;
+            text-align: center;
+            max-width: 350px;
+            width: 100%;
+        }
+
+        .speaker-photo {
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            margin-bottom: 1rem;
+        }
+
+        .speaker-text p {
+            margin: 0.5rem 0;
+        }
+
+        .linkedin-icon img {
+            width: 24px;
+            height: 24px;
+            margin-top: 10px;
+        }
+
+        @media (min-width: 992px) {
+            .speakers-row .col-lg-4 {
+                flex: 1;
+                max-width: 33.333%;
+            }
+        }
+
+        @media (max-width: 991px) {
+            .speakers-row .col-md-6 {
+                flex: 1;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Speakers Section -->
+    <section id="speakers" class="speakers-section" data-aos="fade-up">
+        <div class="ccontainer">
+            <div class="row speakers-row">
+                <!-- Speaker 1 -->
+                <div class="col-lg-4 col-md-6 speaker-item" data-aos="flip-left" data-aos-delay="100">
+                    <img class="speaker-photo" src="static/navaneeth.png" alt="Speaker 1">
+                    <div class="speaker-text">
+                        <p>NAVANEETH MALINGAN</p>
+                        <p>JFounder / CEO / Head of AI at Nunnari Labs.</p>
+                        <a href="https://www.linkedin.com/in/nivu/" target="_blank" class="linkedin-icon">
+                            <img src="static/linkedin.png" alt="LinkedIn">
+                        </a>
+                    </div>
+                </div>
+                <!-- Speaker 2 -->
+                <div class="col-lg-4 col-md-6 speaker-item" data-aos="flip-left" data-aos-delay="200">
+                    <img class="speaker-photo" src="static/Karthikeyan-Saminathan.png" alt="Speaker 1">
+                    <div class="speaker-text">
+                        <p>Dr.KARTHIKEYAN SAMINATHAN</p>
+                        <p>Founder / CEO at AIQuantalytics.</p><br>
+                        <a href='https://www.linkedin.com/in/karthikdecodes/' target="_blank" class="linkedin-icon">
+                            <img src="static/linkedin.png" alt="LinkedIn">
+                        </a>
+                    </div>
+                </div>
+                <!-- Speaker 3 -->
+                <div class="col-lg-4 col-md-6 speaker-item" data-aos="flip-left" data-aos-delay="300">
+                    <img class="speaker-photo" src="static/sp3.jpg" alt="Speaker 3">
+                    <div class="speaker-text">
+                        <p>THIAGARAJAN VARADHARAJU</p>
+                        <p>Founder and MD at KT Telematic Solutions Pvt.Ltd.</p>
+                        <a href="https://www.linkedin.com/in/thiagarajanv?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="linkedin-icon">
+                            <img src="static/linkedin.png" alt="LinkedIn">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

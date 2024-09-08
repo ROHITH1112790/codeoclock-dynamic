@@ -1,22 +1,37 @@
 from flask import Flask, render_template, request, redirect, url_for
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from email.mime.application import MIMEApplication
 import smtplib
 import sqlite3
+import os
 
 app = Flask(__name__)
 
-def send_email(to_email, message, subject="Contact Form Submission"):
+def send_email(to_email, message, pdf_path=None, subject="Contact Form Submission"):
     from_email = "Codeoclock.cit@gmail.com"
-    from_password = "ckqj xlkg exmb qhxi"
-    body = f"{message}"
+    from_password = "ykyy zzgp nior kgdc"
 
+    # Create a multipart email message
     email_message = MIMEMultipart()
     email_message["From"] = from_email
     email_message["To"] = to_email
     email_message["Subject"] = subject
-    email_message.attach(MIMEText(body, "plain"))
 
+    # Attach the message as plain text (so it can be seen directly in the email)
+    email_message.attach(MIMEText(message, "plain"))
+
+    # Attach PDF if provided
+    if pdf_path and os.path.exists(pdf_path):
+        try:
+            with open(pdf_path, "rb") as pdf_file:
+                pdf_attachment = MIMEApplication(pdf_file.read(), _subtype="pdf")
+                pdf_attachment.add_header('Content-Disposition', 'attachment', filename=os.path.basename(pdf_path))
+                email_message.attach(pdf_attachment)
+        except Exception as e:
+            print(f"Failed to attach PDF: {e}")
+
+    # Sending the email
     try:
         server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
         server.login(from_email, from_password)
@@ -53,7 +68,7 @@ def login():
         return redirect(url_for('admin_page', logged_in=True))
     else:
         return redirect(url_for('login_page', error="Invalid credentials"))
-    
+
 @app.route('/send_email', methods=["POST"])
 def handle_send_email():
     try:
@@ -62,12 +77,14 @@ def handle_send_email():
         phone = request.form['phone']
         message = request.form['message']
         consent = 'consent' in request.form
+        pdf_path = 'static/brochure24.pdf'  
+        
         save_to_db(name, to_email, phone, message, consent)
-        send_email(to_email, message)
-        return  redirect(url_for('index'))
+        email_message =f"Dear {name},\n\nThank you for contacting us. We will respond appropriately shortly.\n\nBest regards,\nCODE O CLOCK 24 Team" 
+        send_email(to_email, email_message, pdf_path)
+        return redirect(url_for('index'))
     except KeyError as e:
         return f"Missing field: {e}", 400
-
 
 @app.route('/admin')
 def admin_page():
@@ -98,7 +115,6 @@ def view_submission(submission_id):
         return "Submission not found", 404
 
     return render_template('submission_details.html', submission=submission, logged_in=logged_in)
-
 
 @app.route('/reply', methods=['POST'])
 def handle_reply():
@@ -132,6 +148,5 @@ def logout():
 def register():
     return redirect('https://rzp.io/l/dWwW59XPT')
 
-
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()

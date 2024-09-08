@@ -1,0 +1,195 @@
+.movie-review-card * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.movie-review-card {
+    background-color: black;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.card {
+    position: absolute;
+    height: 550px;
+    width: 380px;
+    overflow: hidden;
+    border-radius: 20px;
+    background-color: bisque;
+    opacity: 0;
+    border: 3px solid transparent;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3), 0px 0px 20px rgba(255, 102, 0, 0.7);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    border: 3px solid;
+    border-image: linear-gradient(135deg, #ee0979, #ff6a00, #ff5722, #ffc107) 1;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5), 0px 0px 30px rgba(255, 128, 0, 0.8);
+}
+
+/* Slide-in animation for left and right cards */
+.card-left {
+    transform: translateX(-150%);
+    animation: slideInFromLeft 1s forwards;
+}
+
+.card-right {
+    transform: translateX(150%);
+    animation: slideInFromRight 1s forwards;
+}
+
+/* Keyframes for slide-in from left */
+@keyframes slideInFromLeft {
+    0% {
+        transform: translateX(-200%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(-70%);
+        opacity: 1;
+    }
+}
+
+/* Keyframes for slide-in from right */
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(200%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(70%);
+        opacity: 1;
+    }
+}
+
+.card .info {
+    position: relative;
+    overflow: hidden;
+}
+
+.card .info::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 150px;
+    background-color: aqua;
+    bottom: 0;
+    transition: height 0.5s, bottom 0.5s;
+    z-index: 1;
+}
+
+.card:hover .info::before {
+    height: 100%;
+    bottom: 0;
+}
+
+.card:nth-child(1) .info::before {
+    background: linear-gradient(0deg, rgb(120, 112, 224) 0%, rgb(137, 100, 194) 50%, transparent);
+}
+
+.card:nth-child(2) .info::before {
+    background: linear-gradient(0deg, rgba(45,87,126,1) 0%, rgba(51,159,159,1) 40%, transparent);
+}
+
+.card .info img {
+    height: 550px;
+    padding-right: 2px;
+    width: auto;
+    transition: 0.5s;
+}
+
+.card:hover .info img {
+    transform: translateY(-30px);
+    filter: blur(5px);
+}
+
+.card .desc {
+    position: absolute;
+    width: 380px;
+    z-index: 2;
+    padding: 20px;
+    left: 0;
+    transition: 0.5s;
+}
+
+.card:nth-child(1) .desc {
+    bottom: -530px; 
+}
+
+.card:nth-child(2) .desc {
+    bottom: -610px; 
+}
+
+.card:hover .desc {
+    bottom: -20px;
+}
+
+.desc .logo {
+    position: relative;
+    bottom: 0px;
+}
+
+.desc button {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    background-color: rgb(26, 26, 26);
+    color: aliceblue;
+}
+
+.register-btn {
+    display: block;
+    width: 150px;
+    margin: 20px auto 0;
+    padding: 12px;
+    background: linear-gradient(45deg, #ff6a00, #ee0979);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+}
+
+.register-btn:hover {
+    background: linear-gradient(45deg, #ee0979, #ff6a00);
+    transform: translateY(-5px);
+    box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Mobile view for stacked cards */
+@media (max-width: 768px) {
+    .movie-review-card {
+        flex-direction: column; /* Stack the cards vertically */
+        justify-content: flex-start;
+        height: auto; /* Allow scrolling */
+        overflow-y: auto;
+    }
+
+    .card {
+        position: relative; /* Let cards flow naturally */
+        margin-bottom: 20px; /* Add space between stacked cards */
+        width: 90%; /* Make cards wider on mobile */
+        transform: none; /* Disable translateX for mobile */
+        opacity: 1; /* Ensure opacity is set */
+    }
+
+    .card-left,
+    .card-right {
+        animation: none; /* Disable slide-in animations on mobile */
+    }
+}
