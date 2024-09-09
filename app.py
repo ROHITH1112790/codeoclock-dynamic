@@ -80,7 +80,7 @@ def handle_send_email():
         pdf_path = 'static/brochure24.pdf'  
         
         save_to_db(name, to_email, phone, message, consent)
-        email_message =f"Dear {name},\n\nThank you for contacting us. We will respond appropriately shortly.\n\nBest regards,\nCODE O CLOCK 24 Team" 
+        email_message =f"Dear {name},\n\nThank you for contacting us. We will respond appropriately shortly.\n\nBest regards,\nCODE O CLOCK 24 Team/n/n For furtherinformation, contact us : +91 98406 76328" 
         send_email(to_email, email_message, pdf_path)
         return redirect(url_for('index'))
     except KeyError as e:
