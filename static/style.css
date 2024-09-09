@@ -1,8 +1,8 @@
 /* Base styles */
 .box {
     position: relative;
-    width: 300px;
-    height: 200px;
+    width: 240px;
+    height: 160px;
     transform-style: preserve-3d;
     animation: animate 40s linear infinite;
 }
