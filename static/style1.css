@@ -72,9 +72,10 @@
 
 .card .info {
     position: relative;
-    overflow: hidden;
+    overflow: hidden; /* Ensures image doesn't overflow the card */
+    height: 100%; /* Make the info section fill the entire card */
+    width: 100%; /* Make the info section fill the card width */
 }
-
 .card .info::before {
     content: '';
     position: absolute;
@@ -100,15 +101,16 @@
 }
 
 .card .info img {
-    height: 550px;
-    padding-right: 2px;
-    width: auto;
-    transition: 0.5s;
+    height: 100%; /* Make the image fill the card vertically */
+    width: 100%; /* Ensure the image fills the card horizontally */
+    object-fit: cover; /* Ensures the image fits perfectly within the card, cropping if necessary */
+    transition: transform 0.5s, filter 0.5s; /* Smooth animation for hover effect */
 }
 
+/* On hover, blur the image */
 .card:hover .info img {
-    transform: translateY(-30px);
-    filter: blur(5px);
+    transform: translateY(-30px); /* Optional: Add a slight vertical movement */
+    filter: blur(5px); /* Blur effect */
 }
 
 .card .desc {
@@ -172,24 +174,49 @@
 }
 
 /* Mobile view for stacked cards */
+/* Mobile view for stacked cards */
 @media (max-width: 768px) {
     .movie-review-card {
         flex-direction: column; /* Stack the cards vertically */
         justify-content: flex-start;
+        align-items: center; /* Center cards in the view */
         height: auto; /* Allow scrolling */
+        padding: 10px;
         overflow-y: auto;
     }
 
     .card {
         position: relative; /* Let cards flow naturally */
         margin-bottom: 20px; /* Add space between stacked cards */
-        width: 90%; /* Make cards wider on mobile */
-        transform: none; /* Disable translateX for mobile */
-        opacity: 1; /* Ensure opacity is set */
+        width: 100%; /* Full width for mobile */
+        max-width: 350px; /* Max width for better appearance */
+        opacity: 1; /* Ensure opacity is visible */
+        transform: none; /* Disable transform on mobile */
+        height: auto; /* Let height adjust based on content */
+        border-radius: 20px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3), 0px 0px 20px rgba(255, 102, 0, 0.7);
     }
 
     .card-left,
     .card-right {
         animation: none; /* Disable slide-in animations on mobile */
+        transform: none; /* Disable transform to make sure they are visible */
+    }
+
+    .card .info img {
+        width: 100%; /* Ensure image scales to card width */
+        height: auto; /* Maintain aspect ratio */
+        padding-right: 0; /* Remove padding */
+    }
+
+    .card .desc {
+        width: 100%; /* Full width for description */
+        padding: 15px;
+        bottom: 0px; /* Adjust position */
+    }
+
+    .register-btn {
+        width: 100%; /* Full width for the button */
+        margin: 15px 0; /* Adjust margin */
     }
 }

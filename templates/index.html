@@ -695,24 +695,53 @@
     }
 
 
+    .whatsapp-icon, .telegram-icon {
+        position: fixed;
+        bottom: 20px;
+        z-index: 1000;
+    }
+    
+    .whatsapp-icon {
+        right: 80px; /* Adjust the position so that both icons do not overlap */
+    }
 
-        .whatsapp-icon {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-        }
-        
-        .whatsapp-icon img {
-            width: 50px;
-            height: 50px;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-        
-        .whatsapp-icon img:hover {
-            transform: scale(1.1);
-        }
+    .telegram-icon {
+        right: 20px; /* Position Telegram closer to the right */
+    }
+
+    .whatsapp-icon img, .telegram-icon img {
+        width: 50px;
+        height: 50px;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+
+    .whatsapp-icon img:hover, .telegram-icon img:hover {
+        transform: scale(1.1);
+    }
+
+
+    
+    .icon-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+        display: flex;
+        flex-direction: column; /* Arrange icons vertically */
+        gap: 10px; /* Add space between the icons */
+    }
+
+    .icon-container a img {
+        width: 50px;
+        height: 50px;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+
+    .icon-container a img:hover {
+        transform: scale(1.1);
+    } 
      
         
         .center-page {
@@ -812,6 +841,7 @@
                         <div class="sponsor-text">
                             <p>Coimbatore Most Trusted IT Service Provider <a href="https://www.palies.in/" target="_blank">palies.in</a>.</p>
                             <p>Palies IT Services is the customer centric service provider located in Coimbatore, India and offering various IT services since 2013. Along with five years of experience in hardware and software support, Mr.Saravanan an energetic professional started making his dream come true, being the stepping stone of Palies IT services. “Success stories are not just written in hands but also carved in reading minds”. Palies IT services consider the agreed projects not only as a duty. We have one of the best Computer Service in Coimbatore</p>
+
                         </div>
                     </div>
                 </div>
@@ -839,21 +869,26 @@
         </p>
     </section>
 
-        <section id="about" class="empowering-coders py-5" data-aos="fade-left" data-aos-delay="200">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-6 col-md-12 mb-4 mb-lg-0">
-                        <img src="static/AI.jpg" alt="Code Image" class="img-fluid"> 
-                    </div>
-                    <div class="col-lg-6 col-md-12 text-center text-md-left">
-                        <h2 class="text-uppercase " style="text-align: center;">AI DAY</h2>
-                        <p>Welcome to AI Day</p>
-                        <p>AI Day 2024 is a premier event dedicated to the exploration and celebration of artificial intelligence and its transformative impact across various industries. This one-day event will bring together leading experts, researchers, and practitioners in the field of AI to share their insights, experiences, and visions for the future. Attendees will have the unique opportunity to engage with thought leaders, network with professionals, and gain a deeper understanding of the latest advancements in AI technologies.</p>
-                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSf-CuNrCaSiob75N9Ve8v3QC21R8jJRrpNVIkqYUz07CUV-2A/viewform?usp=sf_link" class="btn btn-warning mt-3">Register</a>
-                    </div>
+    <section id="about" class="empowering-coders py-5" data-aos="fade-left" data-aos-delay="200">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-12 mb-4 mb-lg-0">
+                    <img src="static/AI.jpg" alt="Code Image" class="img-fluid"> 
+                </div>
+                <div class="col-lg-6 col-md-12 text-center text-md-left">
+                    <h2 class="text-uppercase " style="text-align: center;">AI DAY</h2>
+                    <p>Welcome to AI Day</p>
+                    <p>⭐AI Day 2024 is a premier event dedicated to the exploration and celebration of artificial intelligence and its transformative impact across various industries. This one-day event will bring together leading experts, researchers, and practitioners in the field of AI to share their insights, experiences, and visions for the future. Attendees will have the unique opportunity to engage with thought leaders, network with professionals, and gain a deeper understanding of the latest advancements in AI technologies.</p>
+                    <p>⭐Video Presentation<br>
+                        Immerse yourself in AI-generated video content, where machine learning algorithms create stunning visuals and narratives. Witness how AI is reshaping the future of multimedia and storytelling.</p>
+                        
+                        <p>⭐AI Tools<br>
+                        Explore cutting-edge AI tools that are driving innovation across industries. Get hands-on experience with technologies that are transforming the way we work and create.</p><br></b>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSf-CuNrCaSiob75N9Ve8v3QC21R8jJRrpNVIkqYUz07CUV-2A/viewform?usp=sf_link" class="btn btn-warning mt-3">Register</a>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
         
         <br>
         <br>
@@ -880,7 +915,7 @@
                     <div class="guest-item">
                         <img class="guest-photo img-fluid mx-auto d-block mb-4" src="static/bastin.jpg"  alt="Siddarth, the Product Guy">
                         <div class="guest-text">
-                            <h4>BASTIN ROBIN</h4>
+                            <h4>BASTIN ROBINS</h4>
                             <p>With extensive experience in data infrastructure and decision-making, the Director of Data at ELSA enables seamless, scalable solutions. They drive product growth, optimize user experience, and collaborate across teams to transform data into valuable insights for millions of users.</p>
                             <a href="https://www.linkedin.com/in/bastinrobin/" target="_blank" class="linkedin-icon">
                                 <img src="static/linkedin2.png" alt="LinkedIn">
@@ -893,13 +928,15 @@
                         <div class="guest-text">
                             <h4>SIDDARTH KENGADARAN</h4>
                             <p>He has spent over ten years immersed in product development, navigating the exciting journey from initial spark to successful launch and beyond. He has worked across diverse industries, gaining a deep understanding of what it takes to build products that users truly love.</p>
-                            <p>Visit his page at <a href="https://theproductguy.xyz/" target="_blank">theproductguy.xyz</a> for more information.</p>
-                        </div>
+                            <a href="https://www.linkedin.com/in/siddarthkengadaran/" target="_blank" class="linkedin-icon">
+                                <img src="static/linkedin2.png" alt="LinkedIn">
+                            </a>                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    
     <section id="brochure" style="padding: 50px 0; background-color: #000000;">
         <div class="container">
           <h2 style="text-align: center; margin-bottom: 30px;">BROCHURE</h2>
@@ -911,7 +948,6 @@
           </div>
         </div>
       </section>
-      
     <section id="gallery" class="gallery-section py-5">
         <div class="container">
             <h2 class="text-uppercase text-center mb-4">speakers</h2>
@@ -1107,9 +1143,16 @@
             });
         });
     </script>
-    <a href="https://wa.me/9840676328?text=Hello, I would like to inquire about Code O Clock" target="_blank" class="whatsapp-icon">
+<div class="icon-container">
+    <!-- WhatsApp Icon -->
+    <a href="https://wa.me/9840676328?text=Hello, I would like to inquire about Code O Clock" target="_blank">
         <img src="static/wp.png" alt="WhatsApp" style="width:50px;height:50px;">
     </a>
-    
+
+    <!-- Telegram Icon -->
+    <a href="https://t.me/codeoclock24" target="_blank">
+        <img src="static/telegram.png" alt="Telegram" style="width:40px;height:40px;">
+        </a>
+</div>
     </body>
     </html>

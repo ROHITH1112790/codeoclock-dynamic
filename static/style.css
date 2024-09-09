@@ -1,10 +1,11 @@
 /* Base styles */
 .box {
     position: relative;
-    width: 240px;
-    height: 160px;
+    width: 300px;
+    height: 200px;
     transform-style: preserve-3d;
     animation: animate 40s linear infinite;
+    will-change: transform; /* Optimization for smoother animation */
 }
 
 .box:hover {
@@ -28,7 +29,7 @@
     height: 100%;
     transform-origin: center;
     transform-style: preserve-3d;
-    transform: rotateY(calc(var(--i) * 36deg)) translateZ(450px);
+    transform: rotateY(calc(var(--i) * 36deg)) translateZ(600px); /* Increased spacing */
     -webkit-box-reflect: below 2px linear-gradient(transparent, transparent, rgba(4, 4, 4, 0.267));
 }
 
@@ -55,7 +56,7 @@ img:hover {
     }
 
     .box span {
-        transform: rotateY(calc(var(--i) * 36deg)) translateZ(300px);
+        transform: rotateY(calc(var(--i) * 36deg)) translateZ(400px); /* Adjusted spacing */
     }
     
     .box span img {
@@ -71,7 +72,7 @@ img:hover {
     }
 
     .box span {
-        transform: rotateY(calc(var(--i) * 36deg)) translateZ(200px);
+        transform: rotateY(calc(var(--i) * 36deg)) translateZ(250px); /* Adjusted spacing */
     }
 
     .box span img {
